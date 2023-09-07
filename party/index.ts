@@ -46,6 +46,16 @@ export default class Server implements PartyServer {
         );
         break;
 
+      case "increment":
+        this.party.broadcast(
+          JSON.stringify({
+            type: "increment",
+            data: null,
+          }),
+          [sender.id]
+        );
+        break;
+
       default:
         sender.send(
           JSON.stringify({

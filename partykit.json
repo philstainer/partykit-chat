@@ -1,0 +1,4 @@
+{
+  "name": "partykit-chat-party",
+  "main": "party/index.ts"
+}

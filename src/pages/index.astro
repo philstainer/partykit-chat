@@ -1,16 +1,32 @@
 ---
-
+import Layout from '../components/Layout.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout>
+Hi there!
+</Layout>
+
+<script>
+	import { init } from '../utils/partykit';
+
+	init({
+		log(msg) {
+			const log = document.querySelector('#log');
+			if (!log) {
+				return;
+			}
+
+			log.textContent += '\n' + JSON.stringify(msg);
+		},
+		onMessage({ type, data }) {
+			switch (type) {
+				case 'pong':
+					console.log('pong from server', data)
+					break;
+
+				default:
+					console.log(`unknown message type: ${type}`);
+			}
+		},
+	});
+</script>

@@ -4,12 +4,17 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
+    "dev:server": "partykit dev party/index.ts",
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^3.0.10"
+    "astro": "^3.0.10",
+    "partysocket": "0.0.3"
+  },
+  "devDependencies": {
+    "partykit": "0.0.3"
   }
 }

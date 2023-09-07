@@ -11,8 +11,10 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/solid-js": "^3.0.0",
     "astro": "^3.0.10",
-    "partysocket": "0.0.3"
+    "partysocket": "0.0.3",
+    "solid-js": "^1.4.3"
   },
   "devDependencies": {
     "partykit": "0.0.3"

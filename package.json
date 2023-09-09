@@ -4,17 +4,22 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "dev:server": "partykit dev party/index.ts",
+    "dev:server": "partykit dev",
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/react": "^3.0.2",
     "@astrojs/solid-js": "^3.0.0",
+    "@clerk/clerk-react": "^4.24.2",
+    "@types/react": "^18.0.21",
+    "@types/react-dom": "^18.0.6",
     "astro": "^3.0.10",
     "partysocket": "0.0.3",
-    "solid-js": "^1.7.11"
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
   },
   "devDependencies": {
     "partykit": "0.0.7"

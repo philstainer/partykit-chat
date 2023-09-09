@@ -1,10 +1,9 @@
 ---
 import Layout from '../components/Layout.astro';
-import { Test } from '../components/Test';
+
+import {UserSession} from '../components/UserSession'
 ---
 
 <Layout>
-	Hi there!
-	<Test client:load />
+	<UserSession client:only />
 </Layout>
-

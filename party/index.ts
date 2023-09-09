@@ -9,17 +9,25 @@ import type {
 export default class Server implements PartyServer {
   constructor(readonly party: Party) {}
 
-  onConnect(conn: PartyConnection, ctx: PartyConnectionContext) {
+  onConnect(connection: PartyConnection, ctx: PartyConnectionContext) {
     // A websocket just connected!
     console.log(
       `Connected:
-  id: ${conn.id}
+  id: ${connection.id}
   room: ${this.party.id}
   url: ${new URL(ctx.request.url).pathname}`
     );
 
     // let's send a message to the connection
     // conn.send("hello from server");
+  }
+
+  onClose(connection: PartyConnection) {
+    console.log(
+      `Disconnected:
+  id: ${connection.id}
+  room: ${this.party.id}`
+    );
   }
 
   onMessage(message: string, sender: PartyConnection) {
@@ -40,7 +48,7 @@ export default class Server implements PartyServer {
           JSON.stringify({
             type: "pong",
             data: {
-              message: "hello from server",
+              message: `hello ${data.message} from server`,
             },
           })
         );
@@ -53,6 +61,13 @@ export default class Server implements PartyServer {
             data: null,
           }),
           [sender.id]
+        );
+
+        this.party.broadcast(
+          JSON.stringify({
+            type: "increment-sent",
+            data: null,
+          })
         );
         break;
 

@@ -15,13 +15,13 @@ dependencies:
     specifier: 0.0.3
     version: 0.0.3
   solid-js:
-    specifier: ^1.4.3
+    specifier: ^1.7.11
     version: 1.7.11
 
 devDependencies:
   partykit:
-    specifier: 0.0.3
-    version: 0.0.3(@babel/core@7.22.15)(react-dom@18.2.0)
+    specifier: 0.0.7
+    version: 0.0.7(@babel/core@7.22.15)(react-dom@18.2.0)
 
 packages:
 
@@ -3681,8 +3681,8 @@ packages:
     resolution: {integrity: sha512-Ofn/CTFzRGTTxwpNEs9PP93gXShHcTq255nzRYSKe8AkVpZY7e1fpmTfOyoIvjP5HG7Z2ZM7VS9PPhQGW2pOpw==}
     dev: false
 
-  /partykit@0.0.3(@babel/core@7.22.15)(react-dom@18.2.0):
-    resolution: {integrity: sha512-uE9czH7rPNzFLaWLVG4jIIW3q1f/HMuMNa+5fVaQhFa/cyWbSvZ1Qxx+iIhK1j5y8NNkkuUisHNfmiP4eajW+Q==}
+  /partykit@0.0.7(@babel/core@7.22.15)(react-dom@18.2.0):
+    resolution: {integrity: sha512-OWqN7XSZgPAnKwIzaQE+4QkPlbxtcsrWn3CaJv26awl5GaU9vW1emhYCdjKE581j9gqAhNF0UAiVBmb0eTsXVg==}
     hasBin: true
     dependencies:
       '@clerk/clerk-js': 4.55.0(@babel/core@7.22.15)(react-dom@18.2.0)(react@18.2.0)

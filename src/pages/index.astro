@@ -5,30 +5,6 @@ import { Test } from '../components/Test';
 
 <Layout>
 	Hi there!
-	<Test client:visible />
+	<Test client:load />
 </Layout>
 
-<script>
-	import { init } from '../utils/partykit';
-
-	init({
-		log(msg) {
-			const log = document.querySelector('#log');
-			if (!log) {
-				return;
-			}
-
-			log.textContent += '\n' + JSON.stringify(msg);
-		},
-		onMessage({ type, data }) {
-			switch (type) {
-				case 'pong':
-					console.log('pong from server', data)
-					break;
-
-				default:
-					console.log(`unknown message type: ${type}`);
-			}
-		},
-	});
-</script>

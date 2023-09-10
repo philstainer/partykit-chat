@@ -2,6 +2,7 @@ import type {
   Party,
   PartyConnection,
   PartyConnectionContext,
+  PartyRequest,
   PartyServer,
   PartyWorker,
 } from "partykit/server";
@@ -10,73 +11,59 @@ export default class Server implements PartyServer {
   constructor(readonly party: Party) {}
 
   onConnect(connection: PartyConnection, ctx: PartyConnectionContext) {
-    // A websocket just connected!
-    console.log(
-      `Connected:
-  id: ${connection.id}
-  room: ${this.party.id}
-  url: ${new URL(ctx.request.url).pathname}`
+    const username =
+      new URL(ctx.request.url).searchParams.get("username") ?? "";
+
+    // Send welcome message
+    connection.send(
+      JSON.stringify({
+        type: "welcome",
+        data: { message: `Welcome to the party ${username}` },
+      })
     );
 
-    // let's send a message to the connection
-    // conn.send("hello from server");
+    // Broadcast user joined message
+    this.party.broadcast(
+      JSON.stringify({
+        type: "user-joined",
+        data: { message: `${username} joined the chat` },
+      }),
+      [connection.id]
+    );
   }
 
   onClose(connection: PartyConnection) {
-    console.log(
-      `Disconnected:
-  id: ${connection.id}
-  room: ${this.party.id}`
+    const username = new URL(connection.uri).searchParams.get("username") ?? "";
+
+    this.party.broadcast(
+      JSON.stringify({
+        type: "user-joined",
+        data: { message: `${username} left the chat` },
+      }),
+      [connection.id]
     );
   }
 
   onMessage(message: string, sender: PartyConnection) {
-    // let's log the message
-    // console.log(`connection ${sender.id} sent message: ${message}`);
-    // // as well as broadcast it to all the other connections in the room...
-    // this.party.broadcast(
-    //   `${sender.id}: ${message}`,
-    //   // ...except for the connection it came from
-    //   [sender.id]
-    // );
-
     const { type, data } = JSON.parse(message as string);
 
-    switch (type) {
-      case "ping":
-        sender.send(
-          JSON.stringify({
-            type: "pong",
-            data: {
-              message: `hello ${data.message} from server`,
-            },
-          })
-        );
-        break;
+    console.log(JSON.stringify({ type, data }, null, 2));
 
-      case "increment":
+    const username = new URL(sender.uri).searchParams.get("username") ?? "";
+
+    switch (type) {
+      case "sent-message":
         this.party.broadcast(
           JSON.stringify({
-            type: "increment",
-            data: null,
+            type: "receive-message",
+            data: { message: data.message, sender: username },
           }),
           [sender.id]
-        );
-
-        this.party.broadcast(
-          JSON.stringify({
-            type: "increment-sent",
-            data: null,
-          })
         );
         break;
 
       default:
-        sender.send(
-          JSON.stringify({
-            message: "no type",
-          })
-        );
+        break;
     }
   }
 }

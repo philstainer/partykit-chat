@@ -1,9 +1,4 @@
 {
   "name": "partykit-chat-party",
-  "main": "party/main.ts",
-  "parties": {
-    "chatroom": "party/chatRoom.ts",
-    "chatrooms": "party/chatRooms.ts",
-    "user": "party/user.ts"
-  }
+  "main": "party/main.ts"
 }

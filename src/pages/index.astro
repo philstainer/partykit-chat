@@ -1,9 +1,8 @@
 ---
 import Layout from '../components/Layout.astro';
-
-import {UserSession} from '../components/UserSession'
+import {Chat} from '../components/Chat'
 ---
 
 <Layout>
-	<UserSession client:only />
+  <Chat client:load />
 </Layout>
